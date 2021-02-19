@@ -1,24 +1,28 @@
-
-const OpaCompileResponseParser = require('opa-compile-response-parser')
-
-
 const express = require('express')
+const { exec } = require("child_process");
 const app = express()
-
+var bodyParser = require('body-parser')
 const port = process.env['PORT'] || 1337
 
+const OpaParser = require("opa-compile-response-parser")
 
 
-app.get('/', (req, res) => {
-    const parser = new OpaCompileResponseParser.default()
-    parser.compileRuleResults(asttest)
-    // const result = parser.evaluate()
+app.use(bodyParser.raw({ inflate: true, limit: '100kb', type: 'text/xml' }))
+app.use(bodyParser.raw({ inflate: true, limit: '100kb', type: 'text/plain' }))
 
-  res.send(parser.evaluateAsHumanReadableString())
+app.post('/xml', (req, res) => {
+    /*
+
+    */
+    console.log(req.body.toString('utf8'))
+    res.send("")
 })
 
-app.post('/ast', (req, res) => {
-    console.log(req.body)
+app.post('/rego', (req, res) => {
+    /*
+
+    */
+    const policyString = req.body.toString('utf8')
     res.send("")
 })
 

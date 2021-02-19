@@ -1,0 +1,108 @@
+{
+    "package": {
+        "path": [
+            {
+                "type": "var",
+                "value": "data"
+            },
+            {
+                "type": "string",
+                "value": "example"
+            }
+        ]
+    },
+    "rules": [
+        {
+            "default": true,
+            "head": {
+                "name": "allow",
+                "value": {
+                    "type": "boolean",
+                    "value": false
+                }
+            },
+            "body": [
+                {
+                    "index": 0,
+                    "terms": {
+                        "type": "boolean",
+                        "value": true
+                    }
+                }
+            ]
+        },
+        {
+            "head": {
+                "name": "allow",
+                "value": {
+                    "type": "boolean",
+                    "value": true
+                }
+            },
+            "body": [
+                {
+                    "index": 0,
+                    "terms": [
+                        {
+                            "type": "ref",
+                            "value": [
+                                {
+                                    "type": "var",
+                                    "value": "equal"
+                                }
+                            ]
+                        },
+                        {
+                            "type": "ref",
+                            "value": [
+                                {
+                                    "type": "var",
+                                    "value": "input"
+                                },
+                                {
+                                    "type": "string",
+                                    "value": "name"
+                                }
+                            ]
+                        },
+                        {
+                            "type": "string",
+                            "value": "wolfgang"
+                        }
+                    ]
+                },
+                {
+                    "index": 1,
+                    "terms": [
+                        {
+                            "type": "ref",
+                            "value": [
+                                {
+                                    "type": "var",
+                                    "value": "equal"
+                                }
+                            ]
+                        },
+                        {
+                            "type": "ref",
+                            "value": [
+                                {
+                                    "type": "var",
+                                    "value": "input"
+                                },
+                                {
+                                    "type": "string",
+                                    "value": "favorite_color"
+                                }
+                            ]
+                        },
+                        {
+                            "type": "string",
+                            "value": "blue"
+                        }
+                    ]
+                }
+            ]
+        }
+    ]
+}

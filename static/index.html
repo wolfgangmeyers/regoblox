@@ -2,7 +2,7 @@
 <html>
 <head>
   <meta charset="utf-8">
-  <title>Blockly Demo: Generating Rego</title>
+  <title>Rego Policy Generator</title>
   <script src="blockly_compressed.js"></script>
   <script src="blocks_compressed.js"></script>
   <script src="rego_compressed.js"></script>
@@ -20,16 +20,13 @@
   </style>
 </head>
 <body>
-  <h1><a href="https://developers.google.com/blockly/">Blockly</a> &gt;
-    <a href="../index.html">Demos</a> &gt; Generating Rego</h1>
-
-  <p>GENERATE REGO!!</p>
-
-  <p>&rarr; More info on <a href="https://developers.google.com/blockly/guides/configure/web/code-generators">Code Generators</a> and <a href="https://developers.google.com/blockly/guides/app-integration/running-Rego">Running Rego</a>.</p>
+  <p>Rogue Rego Policy Generator</p>
 
   <p>
     <button onclick="showCode()">Show Rego</button>
-    <button onclick="runCode()">Post Rego</button>
+    <button onclick="postXml()">Post XML</button>
+    <button onclick="postRego()">Post Rego</button>
+    <button onclick="save()">Save</button>
   </p>
 
   <div id="blocklyDiv" style="height: 480px; width: 600px;"></div>
@@ -37,9 +34,13 @@
   <xml xmlns="https://developers.google.com/blockly/xml" id="toolbox" style="display: none">
     <category name="logic">
       <block type="logic_boolean"></block>
+      <block type="logic_compare"></block></block>
     </category>
-    <category name="test">
-      
+    <category name="Values">
+      <block type="text"></block>
+      <block type="math_number">
+        <field name="NUM">123</field>
+      </block>
     </category>
     <category name="Variables" custom="VARIABLE" colour="%{BKY_VARIABLES_HUE}">
     </category>
@@ -47,6 +48,11 @@
     </category>
     <category name="Rego Stuff">
       <block type="package_declaration"></block>
+      <block type="rule"></block>
+      <block type="statement"></block>
+      <block type="input"></block>
+      <block type="input_value"></block>
+      <block type="variable_field"></block>
     </category>
   </xml>
 
@@ -62,18 +68,48 @@
       alert(code);
     }
 
-    async function runCode() {
+    async function postXml() {
       // Generate Rego code and display it.
       Blockly.Rego.INFINITE_LOOP_TRAP = null;
-      var code = Blockly.Rego.workspaceToCode(demoWorkspace);
-      fetch("/ast", {
+
+      const bloxCodeDom = Blockly.Xml.workspaceToDom(demoWorkspace)
+      const xmlCode = Blockly.Xml.domToText(bloxCodeDom)
+      fetch("/xml", {
         method: "POST",
         headers: {
-          "Content-Type": "application/json"
+          "Content-Type": "text/xml"
+        },
+        body: xmlCode
+      })
+    }
+
+    async function postRego() {
+      // Generate Rego code and display it.
+      Blockly.Rego.INFINITE_LOOP_TRAP = null;
+
+      var code = Blockly.Rego.workspaceToCode(demoWorkspace);
+      fetch("/rego", {
+        method: "POST",
+        headers: {
+          "Content-Type": "text/plain"
         },
         body: code
       })
     }
+
+    async function save() {
+      const bloxCodeDom = Blockly.Xml.workspaceToDom(demoWorkspace)
+      const xmlCode = Blockly.Xml.domToText(bloxCodeDom)
+      localStorage.setItem("code", xmlCode)
+    }
+
+    async function load() {
+      const xmlCode = localStorage.getItem("code")
+      // console.log(xmlCode)
+      const dom = Blockly.Xml.textToDom(xmlCode)
+      Blockly.Xml.domToWorkspace(demoWorkspace, dom)
+    }
+    window.setTimeout(load, 1000)
   </script>
 
 </body>

@@ -1,0 +1,9 @@
+version: "3.7"
+services:  
+  opa:
+    image: "openpolicyagent/opa"
+    ports:
+      - "8081:8081"
+
+  devices:
+    image: "devices:dev"
