@@ -140,9 +140,28 @@ Blockly.Blocks['variable_field_value'] = {
     }
 };
 
-Blockly.Rego['variable_field_value'] = function(block) {
+Blockly.Rego['variable_field_value'] = function (block) {
     var text_field = block.getFieldValue('FIELD');
     var value_variable = Blockly.Rego.valueToCode(block, 'VARIABLE', Blockly.Rego.ORDER_ATOMIC);
     var code = `${value_variable}.${text_field}`;
     return [code, Blockly.Rego.ORDER_ATOMIC];
-  };
+};
+
+
+Blockly.Blocks['for_each_member_of'] = {
+    init: function () {
+        this.appendValueInput("NAME")
+            .setCheck(null)
+            .appendField("for each member of");
+        this.setOutput(true, null);
+        this.setColour(230);
+        this.setTooltip("");
+        this.setHelpUrl("");
+    }
+};
+
+Blockly.Rego['for_each_member_of'] = function (block) {
+    var value_name = Blockly.Rego.valueToCode(block, 'NAME', Blockly.Rego.ORDER_ATOMIC);
+    var code = `${value_name}[_]`;
+    return [code, Blockly.Rego.ORDER_ATOMIC];
+};
