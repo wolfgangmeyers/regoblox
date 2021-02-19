@@ -4,8 +4,8 @@ const app = express()
 var bodyParser = require('body-parser')
 
 const port = process.env['PORT'] || 1337
-const port = process.env['PROXY_TO_URL'] || 'localhost:1338'
-const port = process.env['OPA_URL'] || 'localhost:8181'
+const proxyUrl = process.env['PROXY_TO_URL'] || 'localhost:1338'
+const opaUrl = process.env['OPA_URL'] || 'localhost:8181'
 
 
 
@@ -17,16 +17,13 @@ app.post('/xml', (req, res) => {
 
     */
     console.log(req.body.toString('utf8'))
-    res.send("")
+    res.status(200).send()
 })
 
 app.post('/rego', (req, res) => {
-    /*
-
-    */
     const policyString = req.body.toString('utf8')
     console.log(policyString)
-    res.send("")
+    res.status(200).send()
 })
 
 app.use("/media", express.static("static/media"))
