@@ -1,5 +1,6 @@
 <!DOCTYPE html>
 <html>
+
 <head>
   <meta charset="utf-8">
   <title>Rego Policy Generator</title>
@@ -13,12 +14,14 @@
       background-color: #fff;
       font-family: sans-serif;
     }
+
     h1 {
       font-weight: normal;
       font-size: 140%;
     }
   </style>
 </head>
+
 <body>
   <p>Rogue Rego Policy Generator</p>
 
@@ -34,7 +37,8 @@
   <xml xmlns="https://developers.google.com/blockly/xml" id="toolbox" style="display: none">
     <category name="logic">
       <block type="logic_boolean"></block>
-      <block type="logic_compare"></block></block>
+      <block type="logic_compare"></block>
+      </block>
     </category>
     <category name="Values">
       <block type="text"></block>
@@ -56,16 +60,26 @@
       <block type="variable_field_value"></block>
     </category>
   </xml>
-
+  <script type="text/javascript">
+    const onResize = () => {
+      const div = document.getElementById("blocklyDiv")
+      div.style = `width: ${window.innerWidth - 10}px; height: ${window.innerHeight - 140}px;`
+    }
+    window.addEventListener("resize", onResize);
+    onResize()
+  </script>
   <script>
     var demoWorkspace = Blockly.inject('blocklyDiv',
-        {media: '../../media/',
-         toolbox: document.getElementById('toolbox')});
+      {
+        media: '../../media/',
+        toolbox: document.getElementById('toolbox')
+      });
 
     function showCode() {
       // Generate Rego code and display it.
       Blockly.Rego.INFINITE_LOOP_TRAP = null;
       var code = Blockly.Rego.workspaceToCode(demoWorkspace);
+      postRego()
       alert(code);
     }
 
@@ -99,6 +113,7 @@
     }
 
     async function save() {
+      postRego()
       const bloxCodeDom = Blockly.Xml.workspaceToDom(demoWorkspace)
       const xmlCode = Blockly.Xml.domToText(bloxCodeDom)
       localStorage.setItem("code", xmlCode)
@@ -114,4 +129,5 @@
   </script>
 
 </body>
+
 </html>

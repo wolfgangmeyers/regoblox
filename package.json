@@ -18,6 +18,7 @@
   },
   "homepage": "https://github.com/wolfgangmeyers/regoblox#readme",
   "dependencies": {
+    "axios": "^0.21.1",
     "express": "^4.17.1",
     "opa-compile-response-parser": "^1.0.4"
   },
