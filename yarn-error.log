@@ -1,0 +1,50 @@
+Arguments: 
+  /usr/bin/node /usr/local/lib/node_modules/yarn/bin/yarn.js add --dev nodemon
+
+PATH: 
+  /home/MAGICLEAP/ameyers/bin:/usr/local/sbin:/usr/local/bin:/usr/sbin:/usr/bin:/sbin:/bin:/usr/games:/usr/local/games:/snap/bin:/usr/local/lib/node_modules/yarn/bin:/home/MAGICLEAP/ameyers/bin:/usr/local/go/bin:/home/MAGICLEAP/ameyers/Projects/ultimate-shell-config-system/uscs/bin:/home/MAGICLEAP/ameyers/go/bin:/Applications/Firefox.app/Contents/MacOS:/home/MAGICLEAP/ameyers/uscs/bin:/usr/local/lib/node_modules/yarn/bin:/home/MAGICLEAP/ameyers/bin:/usr/local/go/bin:/home/MAGICLEAP/ameyers/Projects/ultimate-shell-config-system/uscs/bin
+
+Yarn version: 
+  1.22.10
+
+Node version: 
+  10.19.0
+
+Platform: 
+  linux x64
+
+Trace: 
+  Error: getaddrinfo ENOTFOUND registry.yarnpkg.com registry.yarnpkg.com:443
+      at GetAddrInfoReqWrap.onlookup [as oncomplete] (dns.js:56:26)
+
+npm manifest: 
+  {
+    "name": "regoblox",
+    "version": "1.0.0",
+    "description": "",
+    "main": "index.js",
+    "scripts": {
+      "start": "node ./index.js",
+      "test": "echo \"Error: no test specified\" && exit 1"
+    },
+    "repository": {
+      "type": "git",
+      "url": "git+https://github.com/wolfgangmeyers/regoblox.git"
+    },
+    "author": "",
+    "license": "ISC",
+    "bugs": {
+      "url": "https://github.com/wolfgangmeyers/regoblox/issues"
+    },
+    "homepage": "https://github.com/wolfgangmeyers/regoblox#readme",
+    "dependencies": {
+      "express": "^4.17.1",
+      "opa-compile-response-parser": "^1.0.4"
+    }
+  }
+
+yarn manifest: 
+  No manifest
+
+Lockfile: 
+  No lockfile

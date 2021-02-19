@@ -1,0 +1,75 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <meta charset="utf-8">
+  <title>Blockly Demo: Generating Rego</title>
+  <script src="blockly_compressed.js"></script>
+  <script src="blocks_compressed.js"></script>
+  <script src="rego_compressed.js"></script>
+  <script src="msg/js/en.js"></script>
+  <style>
+    body {
+      background-color: #fff;
+      font-family: sans-serif;
+    }
+    h1 {
+      font-weight: normal;
+      font-size: 140%;
+    }
+  </style>
+</head>
+<body>
+  <h1><a href="https://developers.google.com/blockly/">Blockly</a> &gt;
+    <a href="../index.html">Demos</a> &gt; Generating Rego</h1>
+
+  <p>GENERATE REGO!!</p>
+
+  <p>&rarr; More info on <a href="https://developers.google.com/blockly/guides/configure/web/code-generators">Code Generators</a> and <a href="https://developers.google.com/blockly/guides/app-integration/running-Rego">Running Rego</a>.</p>
+
+  <p>
+    <button onclick="showCode()">Show Rego</button>
+  </p>
+
+  <div id="blocklyDiv" style="height: 480px; width: 600px;"></div>
+
+  <xml xmlns="https://developers.google.com/blockly/xml" id="toolbox" style="display: none">
+    <category name="logic">
+      <block type="logic_boolean"></block>
+    </category>
+    <category name="test">
+      
+    </category>
+    <category name="Variables" custom="VARIABLE" colour="%{BKY_VARIABLES_HUE}">
+    </category>
+    <category name="Functions" custom="PROCEDURE" colour="%{BKY_PROCEDURES_HUE}">
+    </category>
+  </xml>
+
+  <script>
+    var demoWorkspace = Blockly.inject('blocklyDiv',
+        {media: '../../media/',
+         toolbox: document.getElementById('toolbox')});
+
+    function showCode() {
+      // Generate Rego code and display it.
+      Blockly.Rego.INFINITE_LOOP_TRAP = null;
+      var code = Blockly.Rego.workspaceToCode(demoWorkspace);
+      alert(code);
+    }
+
+    async function runCode() {
+      // Generate Rego code and display it.
+      Blockly.Rego.INFINITE_LOOP_TRAP = null;
+      var code = Blockly.Rego.workspaceToCode(demoWorkspace);
+      fetch(url, {
+        method: "POST",
+        headers: {
+          "Content-Type": "application/json"
+        },
+        body: code
+      })
+    }
+  </script>
+
+</body>
+</html>
