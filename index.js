@@ -23,6 +23,7 @@ app.post('/xml', (req, res) => {
 app.post('/rego', (req, res) => {
     const policyString = req.body.toString('utf8')
     console.log(policyString)
+    axios.post(getOpaPolicyUrl(), policyString)
     res.status(200).send()
 })
 
