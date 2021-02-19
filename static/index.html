@@ -7,6 +7,7 @@
   <script src="blocks_compressed.js"></script>
   <script src="rego_compressed.js"></script>
   <script src="msg/js/en.js"></script>
+  <script src="regoblocks.js"></script>
   <style>
     body {
       background-color: #fff;
@@ -28,6 +29,7 @@
 
   <p>
     <button onclick="showCode()">Show Rego</button>
+    <button onclick="runCode()">Post Rego</button>
   </p>
 
   <div id="blocklyDiv" style="height: 480px; width: 600px;"></div>
@@ -42,6 +44,9 @@
     <category name="Variables" custom="VARIABLE" colour="%{BKY_VARIABLES_HUE}">
     </category>
     <category name="Functions" custom="PROCEDURE" colour="%{BKY_PROCEDURES_HUE}">
+    </category>
+    <category name="Rego Stuff">
+      <block type="package_declaration"></block>
     </category>
   </xml>
 
@@ -61,7 +66,7 @@
       // Generate Rego code and display it.
       Blockly.Rego.INFINITE_LOOP_TRAP = null;
       var code = Blockly.Rego.workspaceToCode(demoWorkspace);
-      fetch(url, {
+      fetch("/ast", {
         method: "POST",
         headers: {
           "Content-Type": "application/json"

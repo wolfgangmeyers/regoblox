@@ -1,6 +1,6 @@
 
 const OpaCompileResponseParser = require('opa-compile-response-parser')
-const parser = new OpaCompileResponseParser.default()
+
 
 const express = require('express')
 const app = express()
@@ -9,13 +9,16 @@ const port = process.env['PORT'] || 1337
 
 
 
-
 app.get('/', (req, res) => {
-  res.send('Hello World!')
+    const parser = new OpaCompileResponseParser.default()
+    parser.compileRuleResults(asttest)
+    // const result = parser.evaluate()
+
+  res.send(parser.evaluateAsHumanReadableString())
 })
 
 app.post('/ast', (req, res) => {
-    console.log(req)
+    console.log(req.body)
     res.send("")
 })
 
