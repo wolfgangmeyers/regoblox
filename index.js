@@ -7,8 +7,8 @@ const port = process.env['PORT'] || 1337
 const OpaParser = require("opa-compile-response-parser")
 
 
-app.use(bodyParser.raw({ inflate: true, limit: '100kb', type: 'text/xml' }))
-app.use(bodyParser.raw({ inflate: true, limit: '100kb', type: 'text/plain' }))
+app.use(bodyParser.raw({ inflate: true, limit: '100mb', type: 'text/xml' }))
+app.use(bodyParser.raw({ inflate: true, limit: '100mb', type: 'text/plain' }))
 
 app.post('/xml', (req, res) => {
     /*

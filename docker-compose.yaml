@@ -2,8 +2,11 @@ version: "3.7"
 services:  
   opa:
     image: "openpolicyagent/opa"
+    command: "run --server --addr :8181"
     ports:
-      - "8081:8081"
+      - "8182:8182"
 
   devices:
     image: "devices:dev"
+    ports:
+      - "1338:80"

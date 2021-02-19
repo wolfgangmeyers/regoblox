@@ -123,3 +123,26 @@ Blockly.Rego['input_value'] = function (block) {
     // TODO: Change ORDER_NONE to the correct strength.
     return [code, Blockly.Rego.ORDER_ATOMIC];
 };
+
+Blockly.Blocks['variable_field_value'] = {
+    init: function () {
+        this.appendDummyInput()
+            .appendField("field")
+            .appendField(new Blockly.FieldTextInput("field"), "FIELD")
+            .appendField("of");
+        this.appendValueInput("VARIABLE")
+            .setCheck(null);
+        this.setInputsInline(true);
+        this.setOutput(true, null);
+        this.setColour(230);
+        this.setTooltip("");
+        this.setHelpUrl("");
+    }
+};
+
+Blockly.Rego['variable_field_value'] = function(block) {
+    var text_field = block.getFieldValue('FIELD');
+    var value_variable = Blockly.Rego.valueToCode(block, 'VARIABLE', Blockly.Rego.ORDER_ATOMIC);
+    var code = `${value_variable}.${text_field}`;
+    return [code, Blockly.Rego.ORDER_ATOMIC];
+  };
